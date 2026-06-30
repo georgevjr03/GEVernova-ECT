@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>George Varughese — Planning &amp; Process Improvement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15201D;
+    --paper:#EFEAE0;
+    --paper-dim:#E5DFD2;
+    --evergreen:#10322B;
+    --evergreen-2:#1C4A3E;
+    --amber:#D97E3D;
+    --brass:#A8916B;
+    --line:rgba(21,32,29,0.16);
+    --line-strong:rgba(21,32,29,0.35);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .disp{font-family:'Space Grotesk',sans-serif;}
+
+  /* texture */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(21,32,29,0.025) 0px, rgba(21,32,29,0.025) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  a{color:inherit;}
+
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+
+  /* ===== Top travel bar ===== */
+  .travelbar{
+    position:sticky; top:0; z-index:50;
+    background:var(--evergreen);
+    color:var(--paper);
+    border-bottom:2px solid var(--amber);
+  }
+  .travelbar .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:56px;
+  }
+  .tb-id{
+    font-size:12px; letter-spacing:0.08em;
+  }
+  .tb-id b{color:var(--amber);}
+  .tb-nav{display:flex; gap:28px; font-size:13px;}
+  .tb-nav a{text-decoration:none; opacity:0.85;}
+  .tb-nav a:hover{opacity:1; color:var(--amber);}
+
+  /* ===== Hero / Job Traveler card ===== */
+  .hero{padding:72px 0 40px; position:relative; z-index:1;}
+  .traveler{
+    background:var(--paper);
+    border:1.5px solid var(--line-strong);
+    border-radius:2px;
+    box-shadow: 6px 6px 0 rgba(16,50,43,0.08);
+    overflow:hidden;
+  }
+  .traveler-head{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    padding:28px 36px 20px;
+    border-bottom:1px dashed var(--line-strong);
+  }
+  .traveler-head .tag{
+    font-size:11px; letter-spacing:0.12em;
+    color:var(--evergreen-2);
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  h1.name{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(38px,5.2vw,64px);
+    font-weight:700;
+    line-height:1.02;
+    margin:0 0 8px;
+    letter-spacing:-0.01em;
+  }
+  .role-line{
+    font-size:18px; color:var(--evergreen-2); font-weight:500;
+  }
+  .status-stamp{
+    border:2px solid var(--amber);
+    color:var(--amber);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px; font-weight:600;
+    letter-spacing:0.1em;
+    padding:8px 14px;
+    transform:rotate(3deg);
+    white-space:nowrap;
+  }
+
+  .traveler-body{padding:28px 36px 36px;}
+  .lede{
+    font-size:18px; line-height:1.6;
+    max-width:680px;
+    color:var(--ink);
+    margin:0 0 26px;
+  }
+  .lede em{font-style:normal; color:var(--evergreen); font-weight:600; border-bottom:2px solid var(--amber);}
+
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:10px 28px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--evergreen-2);
+    padding-top:18px;
+    border-top:1px dashed var(--line-strong);
+  }
+  .meta-row span b{color:var(--ink); font-weight:600;}
+  .meta-row a{text-decoration:none; border-bottom:1px solid var(--brass);}
+  .meta-row a:hover{color:var(--amber); border-color:var(--amber);}
+
+  /* ===== Section shell ===== */
+  section{position:relative; z-index:1; padding:56px 0;}
+  .sec-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--brass);
+    margin-bottom:8px;
+  }
+  h2.sec-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(26px,3.4vw,36px);
+    font-weight:700;
+    margin:0 0 28px;
+    color:var(--evergreen);
+  }
+
+  /* ===== Why GE Vernova ===== */
+  .why{
+    background:var(--evergreen);
+    color:var(--paper);
+  }
+  .why .sec-label{color:var(--amber);}
+  .why h2.sec-title{color:var(--paper);}
+  .why-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:start;}
+  .why p{font-size:16.5px; line-height:1.7; color:rgba(239,234,224,0.92);}
+  .why p + p{margin-top:16px;}
+  .gauge-card{
+    background:rgba(239,234,224,0.06);
+    border:1px solid rgba(239,234,224,0.18);
+    padding:24px;
+  }
+  .gauge-card .gtitle{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.1em;
+    color:var(--amber); text-transform:uppercase; margin-bottom:14px;
+  }
+  .gauge-item{margin-bottom:16px;}
+  .gauge-item:last-child{margin-bottom:0;}
+  .gauge-label{display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px; color:var(--paper);}
+  .gauge-bar{height:6px; background:rgba(239,234,224,0.14); position:relative; overflow:hidden;}
+  .gauge-fill{height:100%; background:var(--amber);}
+
+  /* ===== Work order cards (experience) ===== */
+  .orders{display:flex; flex-direction:column; gap:18px;}
+  .order{
+    background:var(--paper);
+    border:1px solid var(--line-strong);
+    padding:0;
+    display:grid;
+    grid-template-columns:200px 1fr;
+  }
+  .order-id{
+    background:var(--paper-dim);
+    border-right:1px dashed var(--line-strong);
+    padding:22px 20px;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .order-id .num{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--brass); letter-spacing:0.06em;}
+  .order-id .period{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--evergreen-2); margin-top:8px;}
+  .order-id .status{
+    align-self:flex-start;
+    margin-top:14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px; letter-spacing:0.08em;
+    padding:4px 8px;
+    border:1px solid var(--evergreen-2);
+    color:var(--evergreen-2);
+    text-transform:uppercase;
+  }
+  .order-id .status.closed{border-color:var(--brass); color:var(--brass);}
+  .order-main{padding:22px 26px;}
+  .order-main h3{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:21px; margin:0 0 2px; color:var(--evergreen);
+  }
+  .order-main .co{color:var(--evergreen-2); font-weight:600; font-size:14px; margin-bottom:14px;}
+  .order-main ul{margin:0; padding-left:18px;}
+  .order-main li{font-size:15px; line-height:1.6; margin-bottom:7px; color:var(--ink);}
+  .order-main li:last-child{margin-bottom:0;}
+  .order-main li::marker{color:var(--amber);}
+
+  @media (max-width:760px){
+    .order{grid-template-columns:1fr;}
+    .order-id{border-right:none; border-bottom:1px dashed var(--line-strong); flex-direction:row; flex-wrap:wrap; align-items:center; gap:10px 16px;}
+    .order-id .status{margin-top:0;}
+    .why-grid{grid-template-columns:1fr;}
+  }
+
+  /* ===== Skills / instrument panel ===== */
+  .panel{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--line-strong);
+    border:1px solid var(--line-strong);
+  }
+  .panel .cell{background:var(--paper); padding:24px;}
+  .panel .cell h4{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--amber); margin:0 0 12px;
+  }
+  .panel .cell p{font-size:14.5px; line-height:1.6; margin:0; color:var(--ink);}
+  @media (max-width:760px){.panel{grid-template-columns:1fr;}}
+
+  /* ===== Credentials strip ===== */
+  .creds{background:var(--paper-dim); border-top:1px dashed var(--line-strong); border-bottom:1px dashed var(--line-strong);}
+  .creds-row{display:flex; flex-wrap:wrap; gap:14px;}
+  .cred{
+    flex:1 1 220px;
+    background:var(--paper);
+    border:1px solid var(--line-strong);
+    padding:18px 20px;
+  }
+  .cred .cname{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; color:var(--evergreen);}
+  .cred .cnote{font-size:13px; color:var(--evergreen-2); margin-top:4px; line-height:1.5;}
+
+  /* ===== Closing ===== */
+  .closing{padding:64px 0 90px;}
+  .closing-card{
+    background:var(--evergreen);
+    color:var(--paper);
+    padding:48px 44px;
+    position:relative;
+    border:1.5px solid var(--evergreen);
+  }
+  .closing-card::after{
+    content:"";
+    position:absolute; right:24px; top:24px;
+    width:64px; height:64px;
+    border:2px solid var(--amber);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .closing h2{font-family:'Space Grotesk',sans-serif; font-size:clamp(24px,3vw,32px); margin:0 0 14px; max-width:560px;}
+  .closing p{font-size:16px; line-height:1.7; max-width:600px; color:rgba(239,234,224,0.9); margin:0 0 24px;}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px; letter-spacing:0.04em;
+    padding:13px 22px;
+    border:1.5px solid var(--amber);
+    color:var(--amber);
+    text-decoration:none;
+    display:inline-block;
+  }
+  .btn.solid{background:var(--amber); color:var(--evergreen); font-weight:600;}
+  .btn:hover{opacity:0.85;}
+
+  footer{
+    text-align:center; padding:28px 0 40px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px; color:var(--brass);
+  }
+</style>
+</head>
+<body>
+
+<div class="travelbar">
+  <div class="wrap">
+    <div class="tb-id mono">JOB TRAVELER <b>#GV-2026-JA</b> · ROUTING: PLANNING &amp; PROCESS IMPROVEMENT</div>
+    <nav class="tb-nav">
+      <a href="#why">Why GE Vernova</a>
+      <a href="#experience">Work Orders</a>
+      <a href="#panel">Instrument Panel</a>
+      <a href="#credentials">Credentials</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero wrap">
+  <div class="traveler">
+    <div class="traveler-head">
+      <div>
+        <div class="tag mono">Applicant Profile · Dubai, UAE</div>
+        <h1 class="name">George<br>Varughese</h1>
+        <div class="role-line">Production Planning &amp; Process Improvement</div>
+      </div>
+      <div class="status-stamp">ROUTE: APPROVED FOR REVIEW</div>
+    </div>
+    <div class="traveler-body">
+      <p class="lede">I build the trackers, reports, and validation logic that keep operational teams moving. For the last two years that's meant government-sector planning systems and a live HR data pipeline — for the next one, I'd like it to mean <em>Jebel Ali's Gas Turbine and Generator repair floor.</em></p>
+      <div class="meta-row">
+        <span><b>Based:</b> Dubai, UAE</span>
+        <span><b>Available:</b> Immediately</span>
+        <span><b>Visa:</b> UAE Residency + Driving License</span>
+        <span><a href="mailto:georgevjr03@gmail.com">georgevjr03@gmail.com</a></span>
+        <span><a href="tel:+971509382514">+971 50 938 2514</a></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="why" id="why">
+  <div class="wrap why-grid">
+    <div>
+      <div class="sec-label">Field Notes</div>
+      <h2 class="sec-title">Why Jebel Ali</h2>
+      <p>Most "early career programme" applications start from the programme. Mine started from the facility. A repair center for Gas Turbine components and Generator rotors is a planning problem before it's anything else — jobs in progress, parts in transit, schedules under pressure, and a real cost to every day a unit sits unplanned. That's the work I already do, just on a different floor.</p>
+      <p>Dubai is also, right now, an unusually interesting place to be doing it: legacy power infrastructure and large-scale clean energy investment running in parallel, with GE Vernova present across both. I want the first serious chapter of my engineering career to be inside that, not adjacent to it.</p>
+      <p>The 6- and 12-month competency milestones in this programme are, candidly, part of the appeal. I learn fastest with a defined target and real accountability attached to it.</p>
+    </div>
+    <div class="gauge-card">
+      <div class="gtitle">Readiness Check</div>
+      <div class="gauge-item">
+        <div class="gauge-label"><span>Planning tools &amp; KPI reporting</span><span class="mono">Ready</span></div>
+        <div class="gauge-bar"><div class="gauge-fill" style="width:92%"></div></div>
+      </div>
+      <div class="gauge-item">
+        <div class="gauge-label"><span>Excel / Power BI fluency</span><span class="mono">Ready</span></div>
+        <div class="gauge-bar"><div class="gauge-fill" style="width:88%"></div></div>
+      </div>
+      <div class="gauge-item">
+        <div class="gauge-label"><span>Process improvement under live load</span><span class="mono">Ready</span></div>
+        <div class="gauge-bar"><div class="gauge-fill" style="width:85%"></div></div>
+      </div>
+      <div class="gauge-item">
+        <div class="gauge-label"><span>Gas turbine / SCMS domain</span><span class="mono">Learning — fast</span></div>
+        <div class="gauge-bar"><div class="gauge-fill" style="width:38%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-label">Routing History</div>
+    <h2 class="sec-title">Work Orders Completed</h2>
+    <div class="orders">
+
+      <div class="order">
+        <div class="order-id">
+          <div>
+            <div class="num">WO-04 · REACH GROUP</div>
+            <div class="period">MAY 2025 — PRESENT</div>
+          </div>
+          <div class="status">In Progress</div>
+        </div>
+        <div class="order-main">
+          <h3>Member of Technical Staff — Planning, Reporting &amp; Data Systems</h3>
+          <div class="co">Dubai, UAE</div>
+          <ul>
+            <li>Build and maintain planning trackers, KPI dashboards, and Power BI reports for government-sector engagements, supporting scheduling and resourcing decisions.</li>
+            <li>Automated recurring reporting with Python, cutting manual effort by ~40% and improving turnaround for cross-functional stakeholders.</li>
+            <li>Work daily against ERP-connected data sources (500+ live records), owning data validation and standardization for downstream planning.</li>
+            <li>Coordinate with Engineering and Delivery teams to flag process bottlenecks and document SOPs and handover guides.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="order">
+        <div class="order-id">
+          <div>
+            <div class="num">WO-03 · EMDAD HR</div>
+            <div class="period">OCT 2024 — MAY 2025</div>
+          </div>
+          <div class="status closed">Closed — Fixed</div>
+        </div>
+        <div class="order-main">
+          <h3>Process &amp; Data Integration Analyst</h3>
+          <div class="co">Riyadh, KSA · Remote</div>
+          <ul>
+            <li>Diagnosed a live government HR data integration running at a 15% error rate with zero documentation; rebuilt validation logic and brought it below 2% in six weeks, system fully live throughout.</li>
+            <li>Produced KPI and headcount reporting for HR operations used directly in client-facing reviews.</li>
+            <li>Authored RCA summaries and structured process documentation where none previously existed.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="order">
+        <div class="order-id">
+          <div>
+            <div class="num">WO-02 · MAURA</div>
+            <div class="period">JUN 2024 — APR 2025</div>
+          </div>
+          <div class="status closed">Closed</div>
+        </div>
+        <div class="order-main">
+          <h3>Software Engineer — Backend, ML &amp; Infrastructure</h3>
+          <div class="co">MIT-Founded Startup · San Francisco, Remote</div>
+          <ul>
+            <li>Worked inside a lean US startup team spanning UAE, Sweden, and the USA — clear documentation, individual ownership, asynchronous cross-timezone collaboration, no exceptions.</li>
+            <li>Built and optimized data pipelines feeding a production iOS application.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="order">
+        <div class="order-id">
+          <div>
+            <div class="num">WO-01 · CHAMBERLY</div>
+            <div class="period">JUL 2023 — JUN 2024</div>
+          </div>
+          <div class="status closed">Closed</div>
+        </div>
+        <div class="order-main">
+          <h3>iOS Developer (Technical Lead)</h3>
+          <div class="co">Variant Labs · Remote</div>
+          <ul>
+            <li>Led a small cross-functional team through the build and deployment of a physiotherapy app, owning milestone tracking and stakeholder reviews.</li>
+            <li>First formal experience coordinating people and timelines toward a fixed delivery date.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="panel">
+  <div class="wrap">
+    <div class="sec-label">Instrumentation</div>
+    <h2 class="sec-title">What I Bring to the Floor</h2>
+    <div class="panel">
+      <div class="cell">
+        <h4>Planning &amp; Reporting</h4>
+        <p>Advanced Excel (pivots, lookups, validation, dashboards), Power BI for trend and gap visualization, KPI &amp; headcount reporting, planning trackers built for daily use, not one-off decks.</p>
+      </div>
+      <div class="cell">
+        <h4>Data &amp; ERP</h4>
+        <p>SQL (MySQL, MS SQL, PostgreSQL), ERP-connected data validation across 500+ live records, data standardization, Python automation for recurring reports.</p>
+      </div>
+      <div class="cell">
+        <h4>Process Improvement</h4>
+        <p>Root-cause analysis, structured problem-solving, error-rate reduction (15% → &lt;2%), SOP and RCA documentation, process stabilization under live operational load.</p>
+      </div>
+      <div class="cell">
+        <h4>Cross-Functional Coordination</h4>
+        <p>Daily coordination across Engineering and Delivery teams, technical team leadership, stakeholder communication, asynchronous collaboration across UAE, Sweden, and the USA.</p>
+      </div>
+      <div class="cell">
+        <h4>Tools</h4>
+        <p>Power Automate, SharePoint, Git, Linux, GitHub Copilot / AI-assisted engineering workflows, AWS (Certified Cloud Practitioner).</p>
+      </div>
+      <div class="cell">
+        <h4>Learning Mode</h4>
+        <p>New to electrical power systems, SCMS, and industrial repair operations — and building the domain fluency fast, the same way I've approached every system I've had to learn from zero.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="creds" id="credentials">
+  <div class="wrap" style="padding:48px 32px;">
+    <div class="sec-label">Selection Record</div>
+    <h2 class="sec-title">Globally Competitive Programmes</h2>
+    <div class="creds-row">
+      <div class="cred">
+        <div class="cname">McKinsey Forward Programme</div>
+        <div class="cnote">2025 · Selective global early-career development cohort</div>
+      </div>
+      <div class="cred">
+        <div class="cname">Oxford ML Summer School (OxML)</div>
+        <div class="cnote">2025 · Selected among thousands of global applicants</div>
+      </div>
+      <div class="cred">
+        <div class="cname">HPAIR Harvard Delegate</div>
+        <div class="cnote">2025 · Harvard Project for Asian &amp; International Relations</div>
+      </div>
+      <div class="cred">
+        <div class="cname">AWS Certified Cloud Practitioner</div>
+        <div class="cnote">Active</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <div class="closing-card">
+      <h2>Ready to route the next work order.</h2>
+      <p>I'm based in Dubai, available immediately, and looking for one role: Production Planning &amp; Process Improvement, Jebel Ali. I'd welcome the chance to talk through how my background fits the floor.</p>
+      <div class="cta-row">
+        <a class="btn solid" href="mailto:georgevjr03@gmail.com">Email George</a>
+        <a class="btn" href="tel:+971509382514">+971 50 938 2514</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>georgevjr03.github.io/portfolio &middot; Dubai, UAE</footer>
+
+</body>
+</html>
